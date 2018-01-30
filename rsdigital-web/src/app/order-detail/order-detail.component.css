@@ -1,0 +1,17 @@
+.plates{
+  list-style: none;
+  padding: 0;
+}
+
+.plate h3{
+  text-align: left;
+  font-size: 25px;
+  text-transform: capitalize;
+}
+
+.title {
+  text-align: center;
+  font-size: 30px;
+  text-transform: capitalize;
+  width: 100%;
+}

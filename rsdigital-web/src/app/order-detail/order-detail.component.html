@@ -1,0 +1,19 @@
+<mat-card class="order-detail">
+  <mat-card-header>
+    <mat-card-title>
+      <h1 class="title">Mesa: {{ order.table }}</h1>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ul class="plates">
+      <li *ngFor="let plate of order.plates" class="plate">
+        <h3>{{ plate.amount }} - {{ plate.name }} {{ plate.type }}</h3>
+        <p>{{ plate.description }}</p>
+      </li>
+    </ul>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="warn">Editar</button>
+    <button mat-raised-button color="warn">Cobrar</button>
+  </mat-card-actions>
+</mat-card>
