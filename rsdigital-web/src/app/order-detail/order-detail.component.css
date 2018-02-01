@@ -9,6 +9,12 @@
   text-transform: capitalize;
 }
 
+.order-detail{
+  max-width: 400px;
+  box-sizing: border-box;
+  margin: 10px;
+}
+
 .title {
   text-align: center;
   font-size: 30px;

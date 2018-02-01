@@ -1,3 +1,4 @@
-<div class="conatiner">
-  <app-order-detail *ngFor="let order of orders" [order]="order" class="order-detail"></app-order-detail>  
+<div class="container">
+  <app-order-detail *ngFor="let order of orders" [order]="order"></app-order-detail>  
 </div>
+<button mat-fab color="warn" class="addOrder"><mat-icon>add</mat-icon></button>
