@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core'
+import { NgForm } from '@angular/forms'
 
 @Component({
   selector: 'app-create-order',
@@ -7,9 +7,10 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./create-order.component.css']
 })
 export class CreateOrderComponent implements OnInit {
-  public plates: Array<Object>;
-  public order: any;
-  constructor() { 
+  public plates: Array<Object>
+  public order: any = {}
+  public plate: any = {}
+  constructor() {
     this.plates = [
       { name: 'Carne', available: true },
       { name: 'Pernil', available: true },
@@ -23,24 +24,19 @@ export class CreateOrderComponent implements OnInit {
       { name: 'Menu de Trucha', available: true },
       { name: 'Mojarra', available: true },
       { name: 'Bagre', available: true }
-    ];
-    this.order = { 
-      plates: []
-    };
+    ]
   }
 
   ngOnInit() {
   }
 
-  onSubmit(order: NgForm) {
-    this.order.table = order.value.table;
-    this.order.plates.push({
-      amount: order.value.amount,
-      type: '',
-      name: order.value.plate,
-      description: order.value.description
-    });
-    console.log(this.order);
+  onSubmit() {
+    if (!this.order.plates) {
+      this.order.plates = []
+    }
+
+    this.order.plates.push(this.plate)
+    this.plate = {}
   }
 
 }

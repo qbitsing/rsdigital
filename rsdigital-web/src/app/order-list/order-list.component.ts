@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
 const order = {
   table: 2,
   date: new Date(),
   plates: [
     {
-      name: "Carne",
-      type: "bistec",
+      name: 'Carne',
+      type: 'bistec',
       amount: 1,
       description: `
         Con frijol
@@ -15,8 +15,8 @@ const order = {
       `
     },
     {
-      name: "Pechuga",
-      type: "plancha",
+      name: 'Pechuga',
+      type: 'plancha',
       amount: 3,
       description: `
         2 con salsa de ciruelas
@@ -25,17 +25,17 @@ const order = {
       `
     }
   ]
-};
+}
 
 @Component({
   selector: 'app-order-list',
   templateUrl: './order-list.component.html',
   styleUrls: ['./order-list.component.css']
-})  
+})
 export class OrderListComponent implements OnInit {
-  public orders: Array<Object>;
-  constructor() { 
-    this.orders = new Array(10).fill(order);
+  public orders: Array<Object>
+  constructor() {
+    this.orders = new Array(10).fill(order)
   }
 
   ngOnInit() {
