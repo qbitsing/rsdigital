@@ -8,7 +8,8 @@ import { AppComponent } from './app.component'
 import { OrderDetailComponent } from './order-detail/order-detail.component'
 import { OrderListComponent } from './order-list/order-list.component'
 import { CreateOrderComponent } from './create-order/create-order.component'
-import { TobrPipe } from './pipes/tobr.pipe'
+import { TobrPipe } from './pipes/tobr.pipe';
+import { AppRoutingModule } from './app-routing.module'
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { TobrPipe } from './pipes/tobr.pipe'
     RsdigitalMaterialModule,
     MomentModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
