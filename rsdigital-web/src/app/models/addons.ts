@@ -4,12 +4,19 @@ export class Addons {
   public amount: number
 
   constructor(
-    name: string,
-    value: number,
-    amount: number
+    addon: any,
+    name?: string,
+    value?: number,
+    amount?: number
   ) {
-    this.name = name
-    this.value = value
-    this.amount = amount
+    if (addon) {
+      this.name = addon.name
+      this.value = addon.value
+      this.amount = addon.amount
+    } else {
+      this.name = name
+      this.value = value
+      this.amount = amount
+    }
   }
 }

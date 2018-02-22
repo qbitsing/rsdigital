@@ -23,7 +23,7 @@
         name="plate"
         [(ngModel)]="plate.name">
         <ng-container *ngFor="let plate of plates">
-          <mat-option *ngIf="plate.available" [value]="plate.name">
+          <mat-option *ngIf="plate.available" [value]="plate">
             {{plate.name}}
           </mat-option>
         </ng-container>
@@ -39,15 +39,48 @@
       </textarea>
     </mat-form-field>
 
+    <button mat-raised-button color="warn" type="button" (click)="addPlateToOrder()">Agregar</button>
+    <mat-list class="full-width">
+      <mat-list-item *ngFor="let plate of order.plates">
+        <h3 mat-line class="text-center">{{plate.amount}} {{plate.name}}</h3>
+        <p mat-line *ngFor="let line of plate.getDescription()">{{ line }}</p>
+      </mat-list-item>
+    </mat-list>
+    <h2>Adicionales</h2>
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="Nombre"
+        type="text"
+        name="addon.name"
+        [(ngModel)]="addon.name">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="Cantidad"
+        type="number"
+        name="addon.amount"
+        [(ngModel)]="addon.amount">
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="Precio"
+        type="number"
+        name="addon.value"
+        [(ngModel)]="addon.value">
+    </mat-form-field>
+    <button mat-raised-button color="warn" type="button" (click)="addAddonToOrder()">Agregar</button>
+    <mat-list class="full-width">
+      <mat-list-item *ngFor="let addon of order.addons">
+        <h3 mat-line class="text-center">{{addon.amount}} {{addon.name}}</h3>
+      </mat-list-item>
+    </mat-list>
     <button mat-raised-button color="warn" type="submit">Agregar</button>
   </form>
 </div>
 
 <div class="container">
-  <mat-list class="full-width">
-    <mat-list-item *ngFor="let plate of order.plates">
-      <h3 mat-line class="text-center">{{plate.amount}} {{plate.name}}</h3>
-      <p mat-line *ngFor="let des of plate.description | tobr">{{ des }}</p>
-    </mat-list-item>
-  </mat-list>
+  <a  routerLink="/order/list">Lista</a>
 </div>

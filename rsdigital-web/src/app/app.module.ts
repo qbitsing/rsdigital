@@ -10,7 +10,14 @@ import { OrderListComponent } from './order-list/order-list.component'
 import { CreateOrderComponent } from './create-order/create-order.component'
 import { TobrPipe } from './pipes/tobr.pipe';
 import { AppRoutingModule } from './app-routing.module'
+import { OrderService } from './services/order.service'
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -26,9 +33,14 @@ import { AppRoutingModule } from './app-routing.module'
     MomentModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [OrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

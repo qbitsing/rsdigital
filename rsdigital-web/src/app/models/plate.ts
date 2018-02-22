@@ -5,15 +5,23 @@ export class PlateOrder {
   public description: string
 
   constructor(
-    name: string,
-    value: number,
-    amount: number,
-    description: string
+    plate: any,
+    name?: string,
+    value?: number,
+    amount?: number,
+    description?: string
   ) {
-    this.name = name
-    this.value = value
-    this.amount = amount
-    this.description = description
+    if (plate) {
+      this.name = plate.name
+      this.value = plate.value
+      this.amount = plate.amount
+      this.description = plate.description
+    } else {
+      this.name = name
+      this.value = value
+      this.amount = amount
+      this.description = description
+    }
   }
 
   public getDescription(): Array<string> {

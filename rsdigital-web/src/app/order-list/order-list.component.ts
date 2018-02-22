@@ -1,44 +1,22 @@
 import { Component, OnInit } from '@angular/core'
-
-const order = {
-  table: 2,
-  date: new Date(),
-  plates: [
-    {
-      name: 'Carne',
-      type: 'bistec',
-      amount: 1,
-      description: `
-        Con frijol
-        sin arroz
-        ensalada de tomate y cebolla
-      `
-    },
-    {
-      name: 'Pechuga',
-      type: 'plancha',
-      amount: 3,
-      description: `
-        2 con salsa de ciruelas
-        1 ajillo
-        frijol
-      `
-    }
-  ]
-}
-
+import { Order } from '../models/order'
+import { OrderService } from '../services/order.service'
 @Component({
   selector: 'app-order-list',
   templateUrl: './order-list.component.html',
   styleUrls: ['./order-list.component.css']
 })
 export class OrderListComponent implements OnInit {
-  public orders: Array<Object>
-  constructor() {
-    this.orders = new Array(10).fill(order)
+  public orders: Array<Order>
+  constructor(private orderService: OrderService) {
+
   }
 
   ngOnInit() {
+    this.orderService.getOrders()
+      .valueChanges().subscribe((orders: Array<Order>) => {
+        this.orders = orders.map(o => new Order(o))
+      })
   }
 
 }

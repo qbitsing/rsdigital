@@ -8,12 +8,17 @@
     <ul class="plates">
       <li *ngFor="let plate of order.plates" class="plate">
         <h3>{{ plate.amount }} - {{ plate.name }} {{ plate.type }}</h3>
-        <p>{{ plate.description }}</p>
+        <p *ngFor="let line of plate.getDescription()">{{ line }}</p>
+      </li>
+    </ul>
+    <ul class="addons">
+      <li *ngFor="let addon of order.addons" class="addon">
+        <h3>{{ addon.name }} - {{ addon.amount }}</h3>
       </li>
     </ul>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="warn">Editar</button>
-    <button mat-raised-button color="warn">Cobrar</button>
+    <button mat-raised-button color="warn" routerLink="/order/{{order.id}}">Editar</button>
+    <button mat-raised-button color="warn" (click)="chrage()">Cobrar</button>
   </mat-card-actions>
 </mat-card>
