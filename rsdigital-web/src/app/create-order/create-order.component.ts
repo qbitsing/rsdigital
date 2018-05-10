@@ -5,6 +5,9 @@ import { Order } from '../models/order'
 import { PlateOrder } from '../models/plate'
 import { Addons } from '../models/addons'
 import { OrderService } from '../services/order.service'
+import { MatDialog } from '@angular/material';
+import { DialogComponent } from '../app.component'
+
 
 @Component({
   selector: 'app-create-order',
@@ -17,33 +20,81 @@ export class CreateOrderComponent implements OnInit {
   public plate: any = {}
   public addon: any = {}
   public id: string
+  public type: string
+  public languaje = window.localStorage.getItem('languaje') || 'Ingles'
+  public texts = {}
+  public user: any
   constructor(
     private orderService: OrderService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
   ) {
     this.plates = [
-      { value: 8000, name: 'Carne', available: true },
-      { value: 8000, name: 'Pernil', available: true },
-      { value: 8000, name: 'Pechuga', available: true },
-      { value: 8000, name: 'Lomito de Mojarra', available: true },
-      { value: 8000, name: 'Milanesa de Pollo', available: true },
-      { value: 10000, name: 'Lomo de Cerdo', available: true },
-      { value: 15000, name: 'Robalo', available: true },
-      { value: 12000, name: 'Menu de Robalo', available: true },
-      { value: 17000, name: 'Trucha', available: true },
-      { value: 12000, name: 'Menu de Trucha', available: true },
-      { value: 15000, name: 'Mojarra', available: true },
-      { value: 15000, name: 'Bagre', available: true }
+      { value: 8000, name: this.setTowNames('carne', 'meat'), available: true },
+      { value: 8000, name: this.setTowNames('Pernil', 'Chicken leg'), available: true },
+      { value: 8000, name: this.setTowNames('Pechuga', 'Breast'), available: true },
+      { value: 8000, name: this.setTowNames('Lomito de Mojarra', 'Lomito de Mojarra'), available: true },
+      { value: 8000, name: this.setTowNames('Milanesa de Pollo', 'Chicken Milanese'), available: true },
+      { value: 10000, name: this.setTowNames('Lomo de Cerdo', 'Pork Loin'), available: true },
+      { value: 15000, name: this.setTowNames('Robalo', 'Bass'), available: true },
+      { value: 12000, name: this.setTowNames('Menu de Robalo', 'Bass Menu'), available: true },
+      { value: 17000, name: this.setTowNames('Trucha', 'Trout'), available: true },
+      { value: 12000, name: this.setTowNames('Menu de Trucha', 'Trout Menu'), available: true },
+      { value: 15000, name: this.setTowNames('Mojarra', 'Mojarra'), available: true },
+      { value: 15000, name: this.setTowNames('Bagre', 'Catfish'), available: true }
     ]
   }
 
+  setTowNames(nameone, nametow) {
+    const names = {}
+
+    names['Español'] = nameone
+    names['Ingles'] = nametow
+
+    return names
+  }
+
   ngOnInit() {
+    this.user = JSON.parse(window.localStorage.getItem('session'))
     this.id = this.route.snapshot.paramMap.get('id')
     if (this.id !== 'new') {
-      this.order = this.orderService.getOrder(this.id) || {}
+      this.orderService.getOrder(this.id)
+        .valueChanges().subscribe((order: Order) => {
+          this.order = order
+        })
     }
-
-    console.log(this.order)
+    this.texts['Español'] = {
+      createOrder: {
+        tablePlaceholder: 'Mesa',
+        amountPlaceholder: 'Cantidad',
+        platePlaceholder: 'Plato',
+        descriptionPlaceHolder: 'Descripción',
+        addButton: 'Agregar',
+        name: 'Nombre',
+        price: 'Precio',
+        create: 'Crear Pedido',
+        list: 'Lista',
+        addons: 'Adicionales',
+        removeButton: 'Eliminar',
+        address: 'Dirección'
+      }
+    }
+    this.texts['Ingles'] = {
+      createOrder: {
+        tablePlaceholder: 'Table',
+        amountPlaceholder: 'Amount',
+        platePlaceholder: 'Plate',
+        descriptionPlaceHolder: 'Description',
+        addButton: 'Add',
+        name: 'Name',
+        price: 'Price',
+        create: 'Create Order',
+        list: 'List',
+        addons: 'Addons',
+        removeButton: 'Remove',
+        address: 'Address'
+      }
+    }
   }
 
   addPlateToOrder() {
@@ -52,7 +103,6 @@ export class CreateOrderComponent implements OnInit {
     }
 
     this.order.plates.push(new PlateOrder(
-      null,
       this.plate.name.name,
       this.plate.name.value,
       this.plate.amount,
@@ -67,7 +117,6 @@ export class CreateOrderComponent implements OnInit {
     }
 
     this.order.addons.push(new Addons(
-      null,
       this.addon.name,
       this.addon.value,
       this.addon.amount
@@ -75,18 +124,52 @@ export class CreateOrderComponent implements OnInit {
     this.addon = {}
   }
 
+  typeOrder(type: string) {
+    this.type = type
+  }
   onSubmit() {
-    const order = new Order(
-      null,
-      this.order.table,
-      this.order.plates,
-      this.order.addons
-    )
+    let order;
+    if (this.id === 'new') {
+      if (this.type === 'mesa') {
+        this.order.address = null
+      } else {
+        this.order.table = null
+      }
+      order = new Order(
+        this.order.table,
+        this.order.address,
+        this.order.plates,
+        this.order.addons,
+        this.user.email
+      )
+    } else {
+      order = this.order
+    }
     this.orderService.saveOrder(order).then((...res) => {
       console.log(res)
     })
 
     this.order = {}
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '250px',
+      data: { languaje: this.languaje }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.languaje = result || this.languaje
+      window.localStorage.setItem('languaje', this.languaje)
+    })
+  }
+
+  removePlate(i) {
+    this.order.plates.splice(i, 1)
+  }
+
+  removeAddon(i) {
+    this.order.addons.splice(i, 1)
   }
 
 }

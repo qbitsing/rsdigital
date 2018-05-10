@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { CdkTableModule } from '@angular/cdk/table'
 import {
   MatInputModule,
   MatListModule,
@@ -8,7 +9,13 @@ import {
   MatToolbarModule,
   MatIconModule,
   MatCardModule,
-  MatButtonModule
+  MatButtonModule,
+  MatDialogModule,
+  MatRadioModule,
+  MatMenuModule,
+  MatButtonToggleModule,
+  MatExpansionModule,
+  MatPaginatorModule
 } from '@angular/material'
 const modules = [
   BrowserAnimationsModule,
@@ -19,7 +26,14 @@ const modules = [
   MatInputModule,
   MatSelectModule,
   MatTableModule,
-  MatListModule
+  MatListModule,
+  MatDialogModule,
+  MatRadioModule,
+  MatMenuModule,
+  MatButtonToggleModule,
+  MatExpansionModule,
+  MatPaginatorModule,
+  CdkTableModule
 ]
 
 @NgModule({

@@ -1,0 +1,12 @@
+.container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.addOrder{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 25px;
+}

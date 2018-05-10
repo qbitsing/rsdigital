@@ -1,4 +1,26 @@
 <mat-toolbar color="warn">
   <span>Rinconcito del Sabor</span>
+  <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="user">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <mat-list role="list" *ngIf="user">
+      <mat-list-item role="listitem">
+        <i class="material-icons">account_box</i> {{user ? user.email : ''}}</mat-list-item>
+    </mat-list>
+    <button mat-menu-item routerLink="/admin" *ngIf="user.rol == 'admin'">
+      <span>Admin</span>
+    </button>
+    <button mat-menu-item routerLink="/order/list">
+      <span>Ordenes Activas</span>
+    </button>
+    <button mat-menu-item routerLink="/order/all">
+      <span>Todas las Ordenes</span>
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <span>Cerrar Sesion</span>
+    </button>
+  </mat-menu>
 </mat-toolbar>
 <router-outlet></router-outlet>

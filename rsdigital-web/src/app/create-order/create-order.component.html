@@ -1,86 +1,71 @@
 <div class="container">
   <form class="addOrderForm" (ngSubmit)="onSubmit()">
-    <mat-form-field class="full-width">
-      <input 
-        matInput
-        placeholder="Mesa"
-        name="table"
-        [(ngModel)]="order.table">
+    <mat-button-toggle-group #orderType="matButtonToggleGroup">
+      <mat-button-toggle value="llevar" (click)="typeOrder('llevar')">
+        Para Llevar
+      </mat-button-toggle>
+      <mat-button-toggle value="mesa" (click)="typeOrder('mesa')">
+        Para la mesa
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+    <mat-form-field class="full-width" *ngIf="orderType.value == 'mesa'">
+      <input matInput [placeholder]="texts[languaje].createOrder.tablePlaceholder" name="table" [(ngModel)]="order.table">
+    </mat-form-field>
+    <mat-form-field class="full-width" *ngIf="orderType.value == 'llevar'">
+      <input matInput [placeholder]="texts[languaje].createOrder.address" name="address" [(ngModel)]="order.address">
     </mat-form-field>
 
     <mat-form-field class="full-width">
-      <input
-        matInput
-        placeholder="Cantidad"
-        type="number"
-        name="amount"
-        [(ngModel)]="plate.amount">
+      <input matInput [placeholder]="texts[languaje].createOrder.amountPlaceholder" type="number" name="amount" [(ngModel)]="plate.amount">
     </mat-form-field>
 
     <mat-form-field class="full-width">
-      <mat-select 
-        placeholder="Plato" 
-        name="plate"
-        [(ngModel)]="plate.name">
+      <mat-select [placeholder]="texts[languaje].createOrder.platePlaceholder" name="plate" [(ngModel)]="plate.name">
         <ng-container *ngFor="let plate of plates">
           <mat-option *ngIf="plate.available" [value]="plate">
-            {{plate.name}}
+            {{plate.name[languaje]}} - {{ plate.value | currency}}
           </mat-option>
         </ng-container>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="full-width">
-      <textarea
-        matInput
-        placeholder="Descripción"
-        name="description"
-        [(ngModel)]="plate.description">
-      </textarea>
+      <textarea matInput [placeholder]="texts[languaje].createOrder.descriptionPlaceHolder" name="description" [(ngModel)]="plate.description">
+        </textarea>
     </mat-form-field>
 
-    <button mat-raised-button color="warn" type="button" (click)="addPlateToOrder()">Agregar</button>
+    <button mat-raised-button color="warn" type="button" (click)="addPlateToOrder()">{{texts[languaje].createOrder.addButton}}</button>
     <mat-list class="full-width">
-      <mat-list-item *ngFor="let plate of order.plates">
-        <h3 mat-line class="text-center">{{plate.amount}} {{plate.name}}</h3>
-        <p mat-line *ngFor="let line of plate.getDescription()">{{ line }}</p>
+      <mat-list-item *ngFor="let plate of order.plates; let i = index">
+        <h3 mat-line class="text-center">{{plate.amount}} {{plate.name[languaje]}}</h3>
+        <p mat-line *ngFor="let line of plate.description | tobr">{{ line }}</p>
+        <button mat-raised-button color="warn" type="button" (click)="removePlate(i)">{{texts[languaje].createOrder.removeButton}}</button>
       </mat-list-item>
     </mat-list>
-    <h2>Adicionales</h2>
-    <mat-form-field class="full-width">
-      <input
-        matInput
-        placeholder="Nombre"
-        type="text"
-        name="addon.name"
-        [(ngModel)]="addon.name">
-    </mat-form-field>
-    <mat-form-field class="full-width">
-      <input
-        matInput
-        placeholder="Cantidad"
-        type="number"
-        name="addon.amount"
-        [(ngModel)]="addon.amount">
-    </mat-form-field>
-    <mat-form-field class="full-width">
-      <input
-        matInput
-        placeholder="Precio"
-        type="number"
-        name="addon.value"
-        [(ngModel)]="addon.value">
-    </mat-form-field>
-    <button mat-raised-button color="warn" type="button" (click)="addAddonToOrder()">Agregar</button>
-    <mat-list class="full-width">
-      <mat-list-item *ngFor="let addon of order.addons">
-        <h3 mat-line class="text-center">{{addon.amount}} {{addon.name}}</h3>
-      </mat-list-item>
-    </mat-list>
-    <button mat-raised-button color="warn" type="submit">Agregar</button>
+    <div *ngIf="user.rol == 'mesero'">
+      <h2>{{texts[languaje].createOrder.addons}}</h2>
+      <mat-form-field class="full-width">
+        <input matInput [placeholder]="texts[languaje].createOrder.name" type="text" name="addon.name" [(ngModel)]="addon.name">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput [placeholder]="texts[languaje].createOrder.amountPlaceholder" type="number" name="addon.amount" [(ngModel)]="addon.amount">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput [placeholder]="texts[languaje].createOrder.price" type="number" name="addon.value" [(ngModel)]="addon.value">
+      </mat-form-field>
+      <button mat-raised-button color="warn" type="button" (click)="addAddonToOrder()">{{texts[languaje].createOrder.addButton}}</button>
+      <mat-list class="full-width">
+        <mat-list-item *ngFor="let addon of order.addons; let i = index">
+          <h3 mat-line class="text-center">{{addon.amount}} {{addon.name}}</h3>
+          <button mat-raised-button color="warn" type="button" (click)="removeAddon(i)">{{texts[languaje].createOrder.removeButton}}</button>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <button mat-raised-button color="warn" type="submit">{{texts[languaje].createOrder.create}}</button>
   </form>
 </div>
 
-<div class="container">
-  <a  routerLink="/order/list">Lista</a>
-</div>
+<mat-toolbar color="warn">
+  <span class="example-spacer"></span>
+  <button mat-button color="primary" (click)="openDialog()">Idioma: {{languaje}}</button>
+</mat-toolbar>

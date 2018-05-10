@@ -1,14 +1,15 @@
 <mat-card class="order-detail">
   <mat-card-header>
     <mat-card-title>
-      <h1 class="title">Mesa: {{ order.table }}</h1>
+      <h1 class="title" *ngIf="order.table">{{text[languaje].mesa}}: {{ order.table }}</h1>
+      <h1 class="title" *ngIf="order.address">{{text[languaje].mesa}}: {{ order.address }}</h1>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <ul class="plates">
       <li *ngFor="let plate of order.plates" class="plate">
-        <h3>{{ plate.amount }} - {{ plate.name }} {{ plate.type }}</h3>
-        <p *ngFor="let line of plate.getDescription()">{{ line }}</p>
+        <h3>{{ plate.amount }} - {{ plate.name[languaje] }} {{ plate.type }}</h3>
+        <p *ngFor="let line of plate.description | tobr">{{ line }}</p>
       </li>
     </ul>
     <ul class="addons">
@@ -16,9 +17,11 @@
         <h3>{{ addon.name }} - {{ addon.amount }}</h3>
       </li>
     </ul>
+    <p>Estado: {{getState()}}</p>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="warn" routerLink="/order/{{order.id}}">Editar</button>
-    <button mat-raised-button color="warn" (click)="chrage()">Cobrar</button>
+  <mat-card-actions *ngIf="user.rol == 'mesero'">
+    <button mat-raised-button color="warn" routerLink="/order/{{order.id}}" *ngIf="order.active">{{text[languaje].editar}}</button>
+    <button mat-raised-button color="warn" (click)="chrage()" *ngIf="order.active">{{text[languaje].cobrar}}</button>
+    <button mat-raised-button color="warn" (click)="cancel()" *ngIf="order.active">{{text[languaje].cancelar}}</button>
   </mat-card-actions>
 </mat-card>

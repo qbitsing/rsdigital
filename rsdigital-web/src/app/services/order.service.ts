@@ -11,8 +11,8 @@ export class OrderService {
     return this.db.database.ref('orders/' + order.id).set(order)
   }
 
-  public updateOrder(order: Order): void {
-
+  public updateOrder(order: Order) {
+    return this.db.database.ref('orders/' + order.id).set(order)
   }
 
   public getOrders() {
@@ -20,7 +20,19 @@ export class OrderService {
   }
 
   public getOrder(id) {
+    return this.db.object(`orders/${id}`)
+  }
 
+  public login(email) {
+    return this.db.object(`users/${email}`)
+  }
+
+  public register(user: any) {
+    return this.db.database.ref(`users/${user.email}`).set(user)
+  }
+
+  public users() {
+    return this.db.list('users')
   }
 
 }

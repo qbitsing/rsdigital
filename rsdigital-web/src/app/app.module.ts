@@ -4,8 +4,8 @@ import { RsdigitalMaterialModule } from './rsdigital-material/rsdigital-material
 import { MomentModule } from 'angular2-moment'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
-import { AppComponent } from './app.component'
-import { OrderDetailComponent } from './order-detail/order-detail.component'
+import { AppComponent, DialogComponent } from './app.component'
+import { OrderDetailComponent, DialogChargeComponent } from './order-detail/order-detail.component'
 import { OrderListComponent } from './order-list/order-list.component'
 import { CreateOrderComponent } from './create-order/create-order.component'
 import { TobrPipe } from './pipes/tobr.pipe';
@@ -18,6 +18,11 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
+import { OrderAllComponent } from './order-all/order-all.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { AdminComponent } from './admin/admin.component';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +30,14 @@ import { environment } from '../environments/environment';
     OrderDetailComponent,
     OrderListComponent,
     CreateOrderComponent,
-    TobrPipe
+    DialogComponent,
+    DialogChargeComponent,
+    TobrPipe,
+    OrderAllComponent,
+    LoginComponent,
+    RegisterComponent,
+    AdminComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +53,10 @@ import { environment } from '../environments/environment';
     AngularFireDatabaseModule
   ],
   providers: [OrderService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    DialogComponent,
+    DialogChargeComponent
+  ]
 })
 export class AppModule { }

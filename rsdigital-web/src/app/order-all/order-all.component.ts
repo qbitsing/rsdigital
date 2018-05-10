@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core'
-import { Order } from '../models/order'
-import { OrderService } from '../services/order.service'
-import { MatDialog } from '@angular/material'
-import { DialogComponent } from '../app.component'
+import { Component, OnInit } from '@angular/core';
+import { Order } from '../models/order';
+import { OrderService } from '../services/order.service';
+import { MatDialog } from '@angular/material';
+import { DialogComponent } from '../app.component';
+
 @Component({
-  selector: 'app-order-list',
-  templateUrl: './order-list.component.html',
-  styleUrls: ['./order-list.component.css']
+  selector: 'app-order-all',
+  templateUrl: './order-all.component.html',
+  styleUrls: ['./order-all.component.css']
 })
-export class OrderListComponent implements OnInit {
+export class OrderAllComponent implements OnInit {
+
   public orders: Array<Order>
   public languaje = window.localStorage.getItem('languaje') || 'Ingles'
   public user: any
@@ -21,7 +23,7 @@ export class OrderListComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('session'))
     this.orderService.getOrders()
       .valueChanges().subscribe((orders: Array<Order>) => {
-        this.orders = orders.filter(o => (this.user.rol === 'mesero') ? o.active : o.active && o.user === this.user.email)
+        this.orders = orders.filter(o => (this.user.rol === 'mesero') ? true : o.user === this.user.email)
       })
   }
 

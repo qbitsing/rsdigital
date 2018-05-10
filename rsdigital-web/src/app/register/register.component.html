@@ -1,0 +1,12 @@
+<div class="container">
+  <form class="addOrderForm" (ngSubmit)="onSubmit()">
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Username" type="text" name="email" [(ngModel)]="email" required>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Password" type="password" name="password" [(ngModel)]="password" required>
+    </mat-form-field>
+    <button mat-raised-button color="warn" type="submit">Register</button>
+    <button mat-raised-button color="warn" type="button" routerLink="/login">Inicia Sesion</button>
+  </form>
+</div>
