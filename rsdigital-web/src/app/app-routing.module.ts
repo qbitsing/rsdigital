@@ -7,6 +7,7 @@ import { OrderAllComponent } from './order-all/order-all.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AdminComponent } from './admin/admin.component';
+import { LocalizanosComponent } from './localizanos/localizanos.component';
 
 const routes: Routes = [
   { path: '', component: OrderListComponent, pathMatch: 'full' },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'order/:id', component: CreateOrderComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'admin', component: AdminComponent }
+  { path: 'admin', component: AdminComponent },
+  { path: 'localizanos', component: LocalizanosComponent }
 ]
 
 @NgModule({

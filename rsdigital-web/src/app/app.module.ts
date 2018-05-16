@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core'
 import { RsdigitalMaterialModule } from './rsdigital-material/rsdigital-material.module'
 import { MomentModule } from 'angular2-moment'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-
+import { NguiMapModule} from '@ngui/map'
 import { AppComponent, DialogComponent } from './app.component'
 import { OrderDetailComponent, DialogChargeComponent } from './order-detail/order-detail.component'
 import { OrderListComponent } from './order-list/order-list.component'
@@ -23,6 +23,10 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AdminComponent } from './admin/admin.component';
 import { UsersComponent } from './users/users.component';
+import { VentasComponent } from './ventas/ventas.component';
+import { LocalizanosComponent } from './localizanos/localizanos.component';
+
+const URL = 'https://maps.google.com/maps/api/js?key=AIzaSyC6O_PW6x-KhjEq-5kNLM8AklnbiD2VwFo  '
 
 @NgModule({
   declarations: [
@@ -37,7 +41,9 @@ import { UsersComponent } from './users/users.component';
     LoginComponent,
     RegisterComponent,
     AdminComponent,
-    UsersComponent
+    UsersComponent,
+    VentasComponent,
+    LocalizanosComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +56,8 @@ import { UsersComponent } from './users/users.component';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    NguiMapModule.forRoot( { apiUrl: URL } )
   ],
   providers: [OrderService],
   bootstrap: [AppComponent],

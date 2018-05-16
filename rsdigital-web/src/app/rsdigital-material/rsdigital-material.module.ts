@@ -15,7 +15,8 @@ import {
   MatMenuModule,
   MatButtonToggleModule,
   MatExpansionModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatCheckboxModule
 } from '@angular/material'
 const modules = [
   BrowserAnimationsModule,
@@ -33,7 +34,8 @@ const modules = [
   MatButtonToggleModule,
   MatExpansionModule,
   MatPaginatorModule,
-  CdkTableModule
+  CdkTableModule,
+  MatCheckboxModule
 ]
 
 @NgModule({

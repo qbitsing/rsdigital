@@ -7,16 +7,12 @@
     </mat-expansion-panel-header>
     <app-users></app-users>
   </mat-expansion-panel>
-  <mat-expansion-panel (opened)="panelOpenState = true"
-                       (closed)="panelOpenState = false">
+  <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Self aware panel
+        Ventas
       </mat-panel-title>
-      <mat-panel-description>
-        Currently I am {{panelOpenState ? 'open' : 'closed'}}
-      </mat-panel-description>
     </mat-expansion-panel-header>
-    <p>I'm visible because I am open</p>
+    <app-ventas></app-ventas>
   </mat-expansion-panel>
 </mat-accordion>

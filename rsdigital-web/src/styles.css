@@ -1,10 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+html {
+  height: 100%;
+}
+
 body {
+  height: 100%;
+  display: flex;
   margin: 0;
   background: url('https://www.freepik.es/foto-gratis/tartan-fondo-de-madera_1273080.htm');
   background-size: cover;
+}
+
+app-root{
+  width: 100%;
 }
 
 .text-center {
