@@ -9,13 +9,13 @@
       <mat-list-item role="listitem">
         <i class="material-icons">account_box</i> {{user ? user.email : ''}}</mat-list-item>
     </mat-list>
-    <button mat-menu-item routerLink="/admin" *ngIf="user && user.rol == 'admin'">
+    <button mat-menu-item (click)="ruta = '/admin'" *ngIf="user && user.rol == 'admin'">
       <span>Admin</span>
     </button>
-    <button mat-menu-item routerLink="/order/list">
+    <button mat-menu-item (click)="ruta = '/order/list'">
       <span>Ordenes Activas</span>
     </button>
-    <button mat-menu-item routerLink="/order/all">
+    <button mat-menu-item (click)="ruta = '/order/all'">
       <span>Todas las Ordenes</span>
     </button>
     <button mat-menu-item (click)="logout()">
@@ -23,4 +23,10 @@
     </button>
   </mat-menu>
 </mat-toolbar>
-<router-outlet></router-outlet>
+<app-order-list *ngIf="ruta === '/order/list'"></app-order-list>
+<app-order-all *ngIf="ruta === '/order/all'"></app-order-all>
+<app-create-order *ngIf="ruta === '/order'" [orderId]="id"></app-create-order>
+<app-login *ngIf="ruta === '/login'"></app-login>
+<app-register *ngIf="ruta === '/register'"></app-register>
+<app-admin *ngIf="ruta === '/admin'"></app-admin>
+<app-localizanos *ngIf="ruta === '/localizanos'"></app-localizanos>

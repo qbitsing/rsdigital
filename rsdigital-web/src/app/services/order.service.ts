@@ -5,6 +5,8 @@ import { Observable } from 'rxjs/Observable'
 
 @Injectable()
 export class OrderService {
+  user: any
+  laguaje = 'Español'
   constructor(private db: AngularFireDatabase) { }
 
   public saveOrder(order: Order) {
@@ -34,5 +36,19 @@ export class OrderService {
   public users() {
     return this.db.list('users')
   }
+  public setUser(user) {
+    this.user = user
+  }
 
+  public getUser() {
+    return this.user
+  }
+
+  public setLanguaje(lang) {
+    this.laguaje = lang
+  }
+
+  public getLanguaje() {
+    return this.laguaje
+  }
 }

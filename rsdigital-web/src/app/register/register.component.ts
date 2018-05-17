@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../services/order.service';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ export class RegisterComponent implements OnInit {
   public email: string
   public password: string
   public rol = 'cliente'
-  constructor(private loginService: OrderService, private route: Router) { }
+  constructor(private parent: AppComponent, private loginService: OrderService, private route: Router) { }
 
   ngOnInit() {
   }
@@ -25,7 +26,11 @@ export class RegisterComponent implements OnInit {
     }
 
     this.loginService.register(user)
-    this.route.navigate(['login'])
+    this.rute('/login')
+  }
+
+  rute(str) {
+    this.parent.ruta = str
   }
 
 }

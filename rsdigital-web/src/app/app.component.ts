@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
+import { OrderService } from './services/order.service';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,10 @@ export class AppComponent implements OnInit {
   title = 'app'
   languaje = 'Español'
   user: any
+  ruta = '/login'
+  id = 'new'
 
-  constructor(public dialog: MatDialog, private route: Router) { }
+  constructor(public dialog: MatDialog, private route: Router, private loginService: OrderService) { }
 
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent, {
@@ -27,15 +30,13 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    const session = window.localStorage.getItem('session')
-    // if (!session) { return this.route.navigate(['login']) }
-    this.user = JSON.parse(session)
+    this.user = this.loginService.getUser()
   }
 
   logout() {
-    window.localStorage.removeItem('session')
+    this.loginService.setUser(null)
     this.user = null
-    this.route.navigate(['login'])
+    this.ruta = '/login'
   }
 }
 

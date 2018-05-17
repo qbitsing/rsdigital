@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Input } from '@angular/core'
 import { NgForm } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router';
 import { Order } from '../models/order'
@@ -19,9 +19,10 @@ export class CreateOrderComponent implements OnInit {
   public order: any = {}
   public plate: any = {}
   public addon: any = {}
+  @Input() orderId
   public id: string
   public type: string
-  public languaje = window.localStorage.getItem('languaje') || 'Ingles'
+  public languaje = ''
   public texts = {}
   public user: any
   constructor(
@@ -55,8 +56,9 @@ export class CreateOrderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = JSON.parse(window.localStorage.getItem('session')) || { }
-    this.id = this.route.snapshot.paramMap.get('id')
+    this.languaje = this.orderService.getLanguaje() || 'Ingles'
+    this.user = this.orderService.getUser || { }
+    this.id = this.orderId
     if (this.id !== 'new') {
       this.orderService.getOrder(this.id)
         .valueChanges().subscribe((order: Order) => {
@@ -160,7 +162,7 @@ export class CreateOrderComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.languaje = result || this.languaje
-      window.localStorage.setItem('languaje', this.languaje)
+      this.orderService.setLanguaje(this.languaje)
     })
   }
 

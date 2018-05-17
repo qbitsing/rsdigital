@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Inject } from '@angular/core'
 import { Order } from '../models/order'
 import { OrderService } from '../services/order.service'
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
+import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-order-detail',
   templateUrl: './order-detail.component.html',
@@ -13,7 +14,7 @@ export class OrderDetailComponent implements OnInit {
   public total: number
   public text = {}
   public user: any
-  constructor(public orderService: OrderService, public dialog: MatDialog) {
+  constructor(private parent: AppComponent, public orderService: OrderService, public dialog: MatDialog) {
     this.text['Español'] = {
       mesa: 'Mesa',
       editar: 'Editar',
@@ -32,7 +33,7 @@ export class OrderDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('session')) || { }
+    this.user = this.orderService.getUser() || { }
   }
 
   chrage() {
@@ -90,6 +91,11 @@ export class OrderDetailComponent implements OnInit {
     if (this.order.canceled) {
       return 'Cancelada'
     }
+  }
+
+  rute(str, id) {
+    this.parent.ruta = str
+    this.parent.id = id
   }
 
 }

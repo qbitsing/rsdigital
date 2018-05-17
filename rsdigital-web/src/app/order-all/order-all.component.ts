@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Order } from '../models/order';
 import { OrderService } from '../services/order.service';
 import { MatDialog } from '@angular/material';
-import { DialogComponent } from '../app.component';
+import { DialogComponent, AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-order-all',
@@ -12,15 +12,17 @@ import { DialogComponent } from '../app.component';
 export class OrderAllComponent implements OnInit {
 
   public orders: Array<Order>
-  public languaje = window.localStorage.getItem('languaje') || 'Ingles'
+  public languaje: string
   public user: any
   constructor(
     private orderService: OrderService,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private parent: AppComponent) {
   }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('session')) || { }
+    this.user = this.orderService.getUser() || {}
+    this.languaje = this.orderService.getLanguaje() || 'Ingles'
     this.orderService.getOrders()
       .valueChanges().subscribe((orders: Array<Order>) => {
         this.orders = orders.filter(o => (this.user.rol === 'mesero') ? true : o.user === this.user.email)
@@ -35,8 +37,13 @@ export class OrderAllComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.languaje = result || this.languaje
-      window.localStorage.setItem('languaje', this.languaje)
+      this.orderService.setLanguaje(this.languaje)
     })
+  }
+
+  rute(str) {
+    this.parent.ruta = str
+    this.parent.id = 'new'
   }
 
 }
