@@ -19,7 +19,7 @@
     </ul>
     <p>Estado: {{getState()}}</p>
   </mat-card-content>
-  <mat-card-actions *ngIf="user.rol == 'mesero'">
+  <mat-card-actions *ngIf="user && user.rol == 'mesero'">
     <button mat-raised-button color="warn" routerLink="/order/{{order.id}}" *ngIf="order.active">{{text[languaje].editar}}</button>
     <button mat-raised-button color="warn" (click)="chrage()" *ngIf="order.active">{{text[languaje].cobrar}}</button>
     <button mat-raised-button color="warn" (click)="cancel()" *ngIf="order.active">{{text[languaje].cancelar}}</button>

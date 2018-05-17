@@ -20,7 +20,7 @@ export class OrderAllComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('session'))
+    this.user = JSON.parse(localStorage.getItem('session')) || { }
     this.orderService.getOrders()
       .valueChanges().subscribe((orders: Array<Order>) => {
         this.orders = orders.filter(o => (this.user.rol === 'mesero') ? true : o.user === this.user.email)

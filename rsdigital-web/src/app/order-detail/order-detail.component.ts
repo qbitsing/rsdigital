@@ -32,7 +32,7 @@ export class OrderDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('session'))
+    this.user = JSON.parse(localStorage.getItem('session')) || { }
   }
 
   chrage() {

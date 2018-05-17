@@ -55,7 +55,7 @@ export class CreateOrderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user = JSON.parse(window.localStorage.getItem('session'))
+    this.user = JSON.parse(window.localStorage.getItem('session')) || { }
     this.id = this.route.snapshot.paramMap.get('id')
     if (this.id !== 'new') {
       this.orderService.getOrder(this.id)
