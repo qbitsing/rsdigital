@@ -57,7 +57,7 @@ export class CreateOrderComponent implements OnInit {
 
   ngOnInit() {
     this.languaje = this.orderService.getLanguaje() || 'Ingles'
-    this.user = this.orderService.getUser || { }
+    this.user = this.orderService.getUser() || { }
     this.id = this.orderId
     if (this.id !== 'new') {
       this.orderService.getOrder(this.id)
