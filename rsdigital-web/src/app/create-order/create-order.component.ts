@@ -30,26 +30,30 @@ export class CreateOrderComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     this.plates = [
-      { value: 8000, name: this.setTowNames('carne', 'meat'), available: true },
-      { value: 8000, name: this.setTowNames('Pernil', 'Chicken leg'), available: true },
-      { value: 8000, name: this.setTowNames('Pechuga', 'Breast'), available: true },
-      { value: 8000, name: this.setTowNames('Lomito de Mojarra', 'Lomito de Mojarra'), available: true },
-      { value: 8000, name: this.setTowNames('Milanesa de Pollo', 'Chicken Milanese'), available: true },
-      { value: 10000, name: this.setTowNames('Lomo de Cerdo', 'Pork Loin'), available: true },
-      { value: 15000, name: this.setTowNames('Robalo', 'Bass'), available: true },
-      { value: 12000, name: this.setTowNames('Menu de Robalo', 'Bass Menu'), available: true },
-      { value: 17000, name: this.setTowNames('Trucha', 'Trout'), available: true },
-      { value: 12000, name: this.setTowNames('Menu de Trucha', 'Trout Menu'), available: true },
-      { value: 15000, name: this.setTowNames('Mojarra', 'Mojarra'), available: true },
-      { value: 15000, name: this.setTowNames('Bagre', 'Catfish'), available: true }
+      { value: 8000, name: this.setTowNames('carne', 'meat', 'viande', 'carne'), available: true },
+      { value: 8000, name: this.setTowNames('Pernil', 'Chicken leg', 'Pernil' , 'prosciutto'), available: true },
+      { value: 8000, name: this.setTowNames('Pechuga', 'Breast', 'Sein', 'seno'), available: true },
+      // tslint:disable-next-line:max-line-length
+      { value: 8000, name: this.setTowNames('Lomito de Mojarra', 'Lomito de Mojarra', 'Lomito de Mojarra', 'Lomito de Mojarra'), available: true },
+      // tslint:disable-next-line:max-line-length
+      { value: 8000, name: this.setTowNames('Milanesa de Pollo', 'Chicken Milanese', 'Poulet Milanesa', 'Pollo alla milanese'), available: true },
+      { value: 10000, name: this.setTowNames('Lomo de Cerdo', 'Pork Loin', 'Longe de porc', 'Lonza di maiale'), available: true },
+      { value: 15000, name: this.setTowNames('Robalo', 'Bass', 'Snook', 'spigola'), available: true },
+      { value: 12000, name: this.setTowNames('Menu de Robalo', 'Bass Menu', 'Le menu de Robalo', 'Il menu di Robalo'), available: true },
+      { value: 17000, name: this.setTowNames('Trucha', 'Trout', 'Truite', 'trota'), available: true },
+      { value: 12000, name: this.setTowNames('Menu de Trucha', 'Trout Menu', 'Menu de la truite', 'Menu trota'), available: true },
+      { value: 15000, name: this.setTowNames('Mojarra', 'Mojarra', 'Mojarra', 'Mojarra'), available: true },
+      { value: 15000, name: this.setTowNames('Bagre', 'Catfish', 'Silure', 'pesce gatto'), available: true }
     ]
   }
 
-  setTowNames(nameone, nametow) {
+  setTowNames(nameone, nametow, namethree?, namefour?) {
     const names = {}
 
     names['Español'] = nameone
-    names['Ingles'] = nametow
+    names['English'] = nametow
+    names['Français'] = nametow
+    names['Italiano'] = nametow
 
     return names
   }
