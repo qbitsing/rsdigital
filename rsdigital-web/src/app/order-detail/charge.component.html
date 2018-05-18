@@ -1,4 +1,83 @@
-<h4>El valor de su orden es de: {{data.total | currency}}</h4>
+<div class="tiket">
+  <div class="header">
+    <h3>{{text[data.languaje].textRestaurante}}</h3>
+    <h4>el rinconcito del sabor</h4>
+    <h4>{{text[data.languaje].textHorario}}: 8:00 am - 4:00 pm</h4>
+    <br>
+    <h5>{{text[data.languaje].textNit}}: 1100970844-4</h5>
+    <h5>{{text[data.languaje].textDireccion}}: Cra 10 # 12 - 37</h5>
+    <h5>{{text[data.languaje].textTelefono}}: 7236459</h5>
+  </div>
 
-<button mat-raised-button color="warn" (click)="onNoClick(true)">Cerrar Orden</button>
-<button mat-raised-button color="warn" (click)="onNoClick(false)">Cancelar</button>
+  <div class="body">
+    <table class="pedidos">
+      <tr *ngIf="data.order.table">
+        <td colspan="2">{{text[data.languaje].textMesa}}:</td>
+        <td colspan="2">{{data.order.table}}</td>
+      </tr>
+      <tr *ngIf="data.order.adrress">
+          <td>{{text[data.languaje].textDireccion}}:</td>
+          <td colspan="3">{{data.order.adrress}}</td>
+        </tr>
+      <tr>
+        <td>
+          {{text[data.languaje].textCant}}
+        </td>
+        <td>
+          {{text[data.languaje].textDescripcion}}
+        </td>
+        <td>
+          {{text[data.languaje].textValor}}
+        </td>
+        <td>
+          {{text[data.languaje].textTotal}}
+        </td>
+      </tr>
+      <tr *ngFor="let p of data.order.plates">
+        <td>
+          {{p.amount}}
+        </td>
+        <td>
+          {{p.name[data.languaje]}}
+        </td>
+        <td>
+          {{ p.value }}
+        </td>
+        <td>
+          {{ p.value * p.amount }}
+        </td>
+      </tr>
+
+      <tr *ngFor="let a of data.order.addons">
+        <td>
+          {{a.amount}}
+        </td>
+        <td>
+          {{a.name}}
+        </td>
+        <td>
+          {{ a.value }}
+        </td>
+        <td>
+          {{ a.value * a.amount }}
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="footer">
+    <table>
+      <tr>
+        <td>
+          {{text[data.languaje].textTotal}}:
+        </td>
+        <td>
+          {{ data.total | currency }}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<button mat-raised-button color="warn" (click)="onNoClick(true)">{{text[data.languaje].textCerrar}}</button>
+<button mat-raised-button color="warn" (click)="onNoClick(false)">{{text[data.languaje].textCancelar}}</button>

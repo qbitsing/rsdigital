@@ -2,6 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  padding-bottom: 15px;
 }
 
 .addOrder{
@@ -9,4 +10,11 @@
   bottom: 20px;
   right: 20px;
   font-size: 25px;
+}
+
+app-order-detail{
+  width: 95%;
+  max-width: 450px;
+  margin-top: 15px;
+  margin-left: 15px;
 }

@@ -9,15 +9,41 @@
   text-transform: capitalize;
 }
 
-.order-detail{
-  max-width: 400px;
-  box-sizing: border-box;
-  margin: 10px;
-}
-
 .title {
   text-align: center;
   font-size: 30px;
   text-transform: capitalize;
   width: 100%;
+}
+
+.tiket .header{
+  text-align: center;
+  margin-bottom: 15px;
+  border-bottom: solid 1px rgba(0,0,0,.56);
+}
+
+.tiket .header h3{
+  text-transform: capitalize;
+  margin: 0;
+  font-weight: bold;
+}
+
+.tiket .header h4, .tiket .header h5{
+  text-transform: capitalize;
+  margin: 0;
+}
+
+.tiket .body .pedidos {
+  border-collapse: collapse;
+  width: 100%;
+} 
+
+.tiket .body .pedidos, .tiket .body .pedidos td, .tiket .body .pedidos th {
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, .56);
+  text-align: left;
+}
+
+.tiket .body .pedidos td, .tiket .body .pedidos th{
+  padding: 5px;
 }

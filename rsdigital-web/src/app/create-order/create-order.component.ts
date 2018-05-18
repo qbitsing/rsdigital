@@ -22,13 +22,12 @@ export class CreateOrderComponent implements OnInit {
   @Input() orderId
   public id: string
   public type: string
-  public languaje = ''
+  @Input() languaje: string
   public texts = {}
   public user: any
   constructor(
     private orderService: OrderService,
-    private route: ActivatedRoute,
-    public dialog: MatDialog
+    private route: ActivatedRoute
   ) {
     this.plates = [
       { value: 8000, name: this.setTowNames('carne', 'meat'), available: true },
@@ -56,8 +55,7 @@ export class CreateOrderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.languaje = this.orderService.getLanguaje() || 'Ingles'
-    this.user = this.orderService.getUser() || { }
+    this.user = this.orderService.getUser() || {}
     this.id = this.orderId
     if (this.id !== 'new') {
       this.orderService.getOrder(this.id)
@@ -81,7 +79,7 @@ export class CreateOrderComponent implements OnInit {
         address: 'Dirección'
       }
     }
-    this.texts['Ingles'] = {
+    this.texts['English'] = {
       createOrder: {
         tablePlaceholder: 'Table',
         amountPlaceholder: 'Amount',
@@ -95,6 +93,40 @@ export class CreateOrderComponent implements OnInit {
         addons: 'Addons',
         removeButton: 'Remove',
         address: 'Address'
+      }
+    }
+
+    this.texts['Français'] = {
+      createOrder: {
+        tablePlaceholder: 'Table',
+        amountPlaceholder: 'Montant',
+        platePlaceholder: 'Plato',
+        descriptionPlaceHolder: 'Description',
+        addButton: 'Ajouter',
+        name: 'Nom',
+        price: 'Prix',
+        create: 'Créer une commande',
+        list: 'Liste',
+        addons: 'Additional',
+        removeButton: 'Supprimer',
+        address: 'Adresse'
+      }
+    }
+
+    this.texts['Italiano'] = {
+      createOrder: {
+        tablePlaceholder: 'Table',
+        amountPlaceholder: 'Amount',
+        platePlaceholder: 'Plato',
+        descriptionPlaceHolder: 'Descrizione',
+        addButton: 'Aggiungi',
+        name: 'Nome',
+        price: 'Prezzo',
+        create: 'Crea ordine',
+        list: 'Lista',
+        addons: 'Additional',
+        removeButton: 'Elimina',
+        address: 'Indirizzo'
       }
     }
   }
@@ -152,18 +184,6 @@ export class CreateOrderComponent implements OnInit {
     })
 
     this.order = {}
-  }
-
-  openDialog() {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      width: '250px',
-      data: { languaje: this.languaje }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      this.languaje = result || this.languaje
-      this.orderService.setLanguaje(this.languaje)
-    })
   }
 
   removePlate(i) {

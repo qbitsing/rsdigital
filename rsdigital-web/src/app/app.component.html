@@ -13,20 +13,27 @@
       <span>Admin</span>
     </button>
     <button mat-menu-item (click)="ruta = '/order/list'">
-      <span>Ordenes Activas</span>
+      <span>{{text[languaje].activeOrdes}}</span>
     </button>
     <button mat-menu-item (click)="ruta = '/order/all'">
-      <span>Todas las Ordenes</span>
+      <span>{{text[languaje].allOrders}}</span>
+    </button>
+    <button mat-menu-item (click)="ruta = '/localizanos'">
+      <span>{{text[languaje].findUs}}</span>
     </button>
     <button mat-menu-item (click)="logout()">
-      <span>Cerrar Sesion</span>
+      <span>{{text[languaje].singOff}}</span>
     </button>
   </mat-menu>
 </mat-toolbar>
-<app-order-list *ngIf="ruta === '/order/list'"></app-order-list>
-<app-order-all *ngIf="ruta === '/order/all'"></app-order-all>
-<app-create-order *ngIf="ruta === '/order'" [orderId]="id"></app-create-order>
-<app-login *ngIf="ruta === '/login'"></app-login>
-<app-register *ngIf="ruta === '/register'"></app-register>
-<app-admin *ngIf="ruta === '/admin'"></app-admin>
+<app-order-list *ngIf="ruta === '/order/list'" [languaje]="languaje"></app-order-list>
+<app-order-all *ngIf="ruta === '/order/all'" [languaje]="languaje"></app-order-all>
+<app-create-order *ngIf="ruta === '/order'" [orderId]="id" [languaje]="languaje"></app-create-order>
+<app-login *ngIf="ruta === '/login'"  [languaje]="languaje"></app-login>
+<app-register *ngIf="ruta === '/register'" [languaje]="languaje"></app-register>
+<app-admin *ngIf="ruta === '/admin'" [languaje]="languaje"></app-admin>
 <app-localizanos *ngIf="ruta === '/localizanos'"></app-localizanos>
+
+<mat-toolbar color="warn">
+  <button mat-button color="primary" (click)="openDialog()">{{text[languaje].languaje}}: {{languaje}}</button>
+</mat-toolbar>

@@ -1,6 +1,10 @@
 .addOrderForm {
   width: 90%;
-  max-width: 500px;
+  max-width: 450px;
+  background-color: white;
+  padding: 30px;
+  box-sizing: border-box;
+  margin-bottom: 25px;
 }
 
 .full-width {

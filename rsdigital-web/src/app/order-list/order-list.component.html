@@ -2,8 +2,3 @@
   <app-order-detail *ngFor="let order of orders" [order]="order" [languaje]="languaje"></app-order-detail>  
 </div>
 <button mat-fab color="warn" class="addOrder" (click)="rute('/order')"><mat-icon>add</mat-icon></button>
-
-<mat-toolbar color="warn">
-  <span class="example-spacer"></span>
-  <button mat-button color="primary" (click)="openDialog()">Idioma: {{languaje}}</button>
-</mat-toolbar>

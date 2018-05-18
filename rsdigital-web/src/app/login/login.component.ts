@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { OrderService } from '../services/order.service';
 import { Router } from '@angular/router';
 import { AppComponent } from '../app.component';
@@ -10,6 +10,7 @@ import { AppComponent } from '../app.component';
 export class LoginComponent implements OnInit {
   public email: string
   public password: string
+  @Input() languaje: string
   constructor(private parent: AppComponent, private loginService: OrderService, private route: Router) { }
 
   ngOnInit() {

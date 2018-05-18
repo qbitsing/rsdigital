@@ -9,8 +9,9 @@ body {
   height: 100%;
   display: flex;
   margin: 0;
-  background: url('https://www.freepik.es/foto-gratis/tartan-fondo-de-madera_1273080.htm');
+  background: url('./assets/fondo.jpg');
   background-size: cover;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
 }
 
 app-root{

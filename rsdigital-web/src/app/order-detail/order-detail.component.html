@@ -2,7 +2,7 @@
   <mat-card-header>
     <mat-card-title>
       <h1 class="title" *ngIf="order.table">{{text[languaje].mesa}}: {{ order.table }}</h1>
-      <h1 class="title" *ngIf="order.address">{{text[languaje].mesa}}: {{ order.address }}</h1>
+      <h1 class="title" *ngIf="order.address">{{text[languaje].direccion}}: {{ order.address }}</h1>
     </mat-card-title>
   </mat-card-header>
   <mat-card-content>
@@ -17,7 +17,7 @@
         <h3>{{ addon.name }} - {{ addon.amount }}</h3>
       </li>
     </ul>
-    <p>Estado: {{getState()}}</p>
+    <p>{{text[languaje].state}}: {{getState()}}</p>
   </mat-card-content>
   <mat-card-actions *ngIf="user && user.rol == 'mesero'">
     <button mat-raised-button color="warn" (click)="rute('/order', order.id)" *ngIf="order.active">{{text[languaje].editar}}</button>

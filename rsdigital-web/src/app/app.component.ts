@@ -10,10 +10,11 @@ import { OrderService } from './services/order.service';
 })
 export class AppComponent implements OnInit {
   title = 'app'
-  languaje = 'Español'
+  languaje
   user: any
   ruta = '/login'
   id = 'new'
+  text: any
 
   constructor(public dialog: MatDialog, private route: Router, private loginService: OrderService) { }
 
@@ -31,6 +32,39 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.loginService.getUser()
+    this.languaje = this.loginService.getLanguaje()
+    this.text = {}
+    this.text['Español'] = {
+      activeOrdes: 'Órdenes Activas',
+      allOrders: 'Todas las Órdenes',
+      findUs: 'Localizanos',
+      singOff: 'Cerrar Sesión',
+      languaje: 'Idioma'
+    }
+
+    this.text['English'] = {
+      activeOrdes: 'Active Orders',
+      allOrders: 'All Orders',
+      findUs: 'Find us',
+      singOff: 'Logout',
+      languaje: 'Language'
+    }
+
+    this.text['Français'] = {
+      activeOrdes: 'Commandes actives',
+      allOrders: 'Toutes les commandes',
+      findUs: 'Trouvez-nous',
+      singOff: 'Fermer la session',
+      languaje: 'Langue'
+    }
+
+    this.text['Italiano'] = {
+      activeOrdes: 'Ordini attivi',
+      allOrders: 'Tutti gli ordini',
+      findUs: 'Trovaci',
+      singOff: 'Close Session',
+      languaje: 'Lingua'
+    }
   }
 
   logout() {
@@ -38,6 +72,7 @@ export class AppComponent implements OnInit {
     this.user = null
     this.ruta = '/login'
   }
+
 }
 
 @Component({
@@ -58,7 +93,7 @@ export class AppComponent implements OnInit {
 })
 export class DialogComponent {
 
-  constructor( public dialogRef: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(public dialogRef: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
     console.log(this.data.languaje)
