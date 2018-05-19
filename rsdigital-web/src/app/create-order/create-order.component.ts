@@ -52,8 +52,8 @@ export class CreateOrderComponent implements OnInit {
 
     names['Español'] = nameone
     names['English'] = nametow
-    names['Français'] = nametow
-    names['Italiano'] = nametow
+    names['Français'] = namethree
+    names['Italiano'] = namefour
 
     return names
   }
