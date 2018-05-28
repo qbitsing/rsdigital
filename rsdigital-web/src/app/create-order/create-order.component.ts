@@ -80,7 +80,9 @@ export class CreateOrderComponent implements OnInit {
         list: 'Lista',
         addons: 'Adicionales',
         removeButton: 'Eliminar',
-        address: 'Dirección'
+        address: 'Dirección',
+        paraMesa: 'Para la mesa',
+        paraLlevar: 'Para llevar'
       }
     }
     this.texts['English'] = {
@@ -96,7 +98,9 @@ export class CreateOrderComponent implements OnInit {
         list: 'List',
         addons: 'Addons',
         removeButton: 'Remove',
-        address: 'Address'
+        address: 'Address',
+        paraMesa: 'For the table',
+        paraLlevar: 'To carry'
       }
     }
 
@@ -104,7 +108,7 @@ export class CreateOrderComponent implements OnInit {
       createOrder: {
         tablePlaceholder: 'Table',
         amountPlaceholder: 'Montant',
-        platePlaceholder: 'Plato',
+        platePlaceholder: 'Plat',
         descriptionPlaceHolder: 'Description',
         addButton: 'Ajouter',
         name: 'Nom',
@@ -113,7 +117,9 @@ export class CreateOrderComponent implements OnInit {
         list: 'Liste',
         addons: 'Additional',
         removeButton: 'Supprimer',
-        address: 'Adresse'
+        address: 'Adresse',
+        paraMesa: 'Pour la table',
+        paraLlevar: 'Porter'
       }
     }
 
@@ -121,7 +127,7 @@ export class CreateOrderComponent implements OnInit {
       createOrder: {
         tablePlaceholder: 'Table',
         amountPlaceholder: 'Amount',
-        platePlaceholder: 'Plato',
+        platePlaceholder: 'Piatto',
         descriptionPlaceHolder: 'Descrizione',
         addButton: 'Aggiungi',
         name: 'Nome',
@@ -130,7 +136,9 @@ export class CreateOrderComponent implements OnInit {
         list: 'Lista',
         addons: 'Additional',
         removeButton: 'Elimina',
-        address: 'Indirizzo'
+        address: 'Indirizzo',
+        paraMesa: 'Per il tavolo',
+        paraLlevar: 'Per trasportare'
       }
     }
   }

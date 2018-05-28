@@ -2,10 +2,10 @@
   <form class="addOrderForm" (ngSubmit)="onSubmit()">
     <mat-button-toggle-group #orderType="matButtonToggleGroup">
       <mat-button-toggle value="llevar" (click)="typeOrder('llevar')">
-        Para Llevar
+        {{texts[languaje].createOrder.paraLlevar}}
       </mat-button-toggle>
       <mat-button-toggle value="mesa" (click)="typeOrder('mesa')">
-        Para la mesa
+        {{texts[languaje].createOrder.paraMesa}}
       </mat-button-toggle>
     </mat-button-toggle-group>
     <mat-form-field class="full-width" *ngIf="orderType.value == 'mesa'">

@@ -7,8 +7,8 @@
 /out-tsc
 
 # dependencies
-/node_modules
-
+node_modules/
+rsdigital-movil/
 # IDEs and editors
 /.idea
 .project
